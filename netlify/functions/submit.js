@@ -106,9 +106,7 @@ function validiere(d) {
   if (!d.ort) f.ort = 'Bitte gib deinen Ort ein.';
   if (!ZAHLUNGSARTEN.includes(d.zahlungsart)) f.zahlungsart = 'Bitte wähl eine Zahlungsart.';
   if (d.zahlungsart === 'sepa') {
-    if (!d.kontoinhaber) f.kontoinhaber = 'Bitte gib den Kontoinhaber ein.';
     if (!ibanGueltig(d.iban)) f.iban = 'Diese IBAN ist ungültig. Bitte prüf sie noch einmal.';
-    if (d.sepa_mandat !== 'ja') f.sepa_mandat = 'Bitte bestätige das SEPA-Lastschriftmandat.';
   }
   if (d.agb !== 'ja') f.agb = 'Bitte bestätige AGB und Datenschutz.';
   return f;
@@ -186,9 +184,7 @@ exports.handler = async (event) => {
     plz: str(body.plz, 10),
     ort: str(body.ort, 100),
     zahlungsart: str(body.zahlungsart, 20),
-    kontoinhaber: str(body.kontoinhaber, 120),
     iban: cleanIban(body.iban).slice(0, 34),
-    sepa_mandat: str(body.sepa_mandat, 5),
     lieferhinweis: str(body.lieferhinweis, 500),
     agb: str(body.agb, 5),
     utm_source: str(body.utm_source),
@@ -232,7 +228,8 @@ exports.handler = async (event) => {
     plz: d.plz,
     ort: d.ort,
     zahlungsart: sepa ? 'SEPA-Lastschrift' : 'Rechnung',
-    kontoinhaber: sepa ? d.kontoinhaber : '',
+    // Kein eigenes Feld mehr: Kontoinhaber = Besteller, Mandat gilt mit dem Absenden als erteilt
+    kontoinhaber: sepa ? `${d.vorname} ${d.nachname}` : '',
     iban: sepa ? d.iban : '',
     sepa_mandat: sepa ? 'ja' : '',
     lieferhinweis: d.lieferhinweis,

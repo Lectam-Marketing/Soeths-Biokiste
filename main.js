@@ -20,7 +20,7 @@
 
   // Zahlungsarten. Phase 2: { paypal: { felder: [] } } ergänzen + Radio/Panel im HTML.
   var ZAHLUNGSARTEN = {
-    sepa: { felder: ['kontoinhaber', 'iban', 'sepa_mandat'] },
+    sepa: { felder: ['iban'] },
     rechnung: { felder: [] }
   };
 
@@ -240,18 +240,10 @@
     },
     ort: function (v) { return v ? '' : 'Bitte gib deinen Ort ein.'; },
     zahlungsart: function (v) { return ZAHLUNGSARTEN[v] ? '' : 'Bitte wähl eine Zahlungsart.'; },
-    kontoinhaber: function (v) {
-      if (zahlungsart() !== 'sepa') return '';
-      return v ? '' : 'Bitte gib den Kontoinhaber ein.';
-    },
     iban: function (v) {
       if (zahlungsart() !== 'sepa') return '';
       if (!v) return 'Bitte gib deine IBAN ein.';
       return ibanGueltig(v) ? '' : 'Diese IBAN ist ungültig. Bitte prüf sie noch einmal.';
-    },
-    sepa_mandat: function (v) {
-      if (zahlungsart() !== 'sepa') return '';
-      return v ? '' : 'Bitte bestätige das SEPA-Lastschriftmandat.';
     },
     agb: function (v) { return v ? '' : 'Bitte bestätige AGB und Datenschutz.'; }
   };
@@ -398,9 +390,7 @@
       plz: wert('plz'),
       ort: wert('ort'),
       zahlungsart: art,
-      kontoinhaber: art === 'sepa' ? wert('kontoinhaber') : '',
       iban: art === 'sepa' ? cleanIban(wert('iban')) : '',
-      sepa_mandat: art === 'sepa' ? wert('sepa_mandat') : '',
       lieferhinweis: wert('lieferhinweis'),
       agb: wert('agb'),
       website: form.elements.website.value,

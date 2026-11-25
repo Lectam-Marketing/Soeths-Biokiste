@@ -39,7 +39,7 @@
           <label class="box">
             <input type="radio" name="kiste" value="Regionalkiste" required>
             <span class="box__card">
-              <!-- TODO: Bild vom Kunden (Regionalkiste). Mit scripts/bilder-holen.sh vorläufig von der Website übernehmen -->
+              <!-- Vorläufiges Foto von soeths-biokiste.de -->
               <img class="box__img" src="assets/regionalkiste.webp" width="640" height="480" alt="Regionalkiste mit saisonalem Bio-Gemüse" loading="lazy" decoding="async">
               <span class="box__body">
                 <span class="box__name">Regionalkiste</span>
@@ -54,7 +54,7 @@
           <label class="box">
             <input type="radio" name="kiste" value="Mixkiste">
             <span class="box__card">
-              <!-- TODO: Bild vom Kunden (Mixkiste mit Obst). Mit scripts/bilder-holen.sh vorläufig von der Website übernehmen -->
+              <!-- TODO: Eigenes Foto der Mixkiste einsetzen (assets/mixkiste.webp, 640x480). Aktuell vorläufig von soeths-biokiste.de -->
               <img class="box__img" src="assets/mixkiste.webp" width="640" height="480" alt="Mixkiste mit Bio-Gemüse und Obst" loading="lazy" decoding="async">
               <span class="box__body">
                 <span class="box__name">Mixkiste</span>
@@ -93,7 +93,7 @@
             <span><strong>Jede Woche frisch bis an deine Haustür</strong><br>Saisonal, regional, ohne Umwege.</span>
           </li>
         </ul>
-        <!-- TODO: Bild vom Kunden (Hof oder Team). Mit scripts/bilder-holen.sh vorläufig von der Website übernehmen -->
+        <!-- Teamfoto von soeths-biokiste.de -->
         <img class="trust__img" src="assets/hof.webp" width="720" height="408" alt="Das Team von Söth's Biokiste" loading="lazy" decoding="async">
         <p class="trust__note">Bio-zertifiziert, Öko-Kontrollstelle DE-ÖKO-006</p>
       </div>
@@ -180,25 +180,14 @@
 
           <div class="payment__panel" data-payment-panel="sepa" hidden>
             <div class="field">
-              <label for="kontoinhaber">Kontoinhaber</label>
-              <input id="kontoinhaber" name="kontoinhaber" type="text" autocomplete="name" aria-describedby="kontoinhaber-error">
-              <p class="field-error" id="kontoinhaber-error" data-error-for="kontoinhaber" aria-live="polite"></p>
-            </div>
-            <div class="field">
               <label for="iban">IBAN</label>
-              <input id="iban" name="iban" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="DE00 0000 0000 0000 0000 00" maxlength="42" aria-describedby="iban-error">
+              <input id="iban" name="iban" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="DE00 0000 0000 0000 0000 00" maxlength="42" aria-describedby="iban-error sepa-text">
               <p class="field-error" id="iban-error" data-error-for="iban" aria-live="polite"></p>
-            </div>
-            <div class="field">
-              <label class="check">
-                <input type="checkbox" name="sepa_mandat" value="ja" aria-describedby="sepa-text sepa_mandat-error">
-                <span>Ich erteile das SEPA-Lastschriftmandat.</span>
-              </label>
-              <!-- TODO: Gläubiger-ID und finalen Mandatstext vom Kunden einsetzen -->
+              <!-- TODO: Gläubiger-ID und finalen Mandatstext vom Kunden einsetzen.
+                   Kein extra Häkchen: Das Mandat wird mit dem Absenden der Bestellung erteilt, Kontoinhaber = Besteller. -->
               <p class="mandate" id="sepa-text">
-                Ich ermächtige Söth's Biokiste (Gläubiger-ID: DE00ZZZ00000000000), Zahlungen von meinem Konto mittels Lastschrift einzuziehen. Zugleich weise ich mein Kreditinstitut an, die von Söth's Biokiste auf mein Konto gezogenen Lastschriften einzulösen. Die Mandatsreferenz wird dir separat mitgeteilt. Hinweis: Ich kann innerhalb von acht Wochen, beginnend mit dem Belastungsdatum, die Erstattung des belasteten Betrags verlangen. Es gelten dabei die mit meinem Kreditinstitut vereinbarten Bedingungen.
+                Mit dem Absenden ermächtigst du Söth's Biokiste (Gläubiger-ID: DE00ZZZ00000000000), Zahlungen von deinem Konto mittels Lastschrift einzuziehen. Zugleich weist du dein Kreditinstitut an, diese Lastschriften einzulösen. Die Mandatsreferenz teilen wir dir separat mit. Du kannst innerhalb von acht Wochen, beginnend mit dem Belastungsdatum, die Erstattung des belasteten Betrags verlangen. Es gelten die mit deinem Kreditinstitut vereinbarten Bedingungen.
               </p>
-              <p class="field-error" id="sepa_mandat-error" data-error-for="sepa_mandat" aria-live="polite"></p>
             </div>
           </div>
 
