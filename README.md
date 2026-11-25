@@ -45,3 +45,4 @@ Vor jedem Push: Formular lokal absenden, Ansicht auf 375 px prüfen.
 Vor jeder Session `git pull`. Kleine Commits auf Deutsch, nach jedem Schritt pushen.
 
 > Hinweis Datenschutz: Das Google Sheet in Make enthält IBANs. Zugriff auf das Nötigste beschränken.
+> 
