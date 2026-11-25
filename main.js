@@ -299,6 +299,7 @@
         gesehen[t.value] = true;
         track('ViewContent', { content_name: t.value, value: PREIS_PRO_KISTE, currency: 'EUR' });
       }
+      zumFormular();
     }
     if (t.name === 'zahlungsart') {
       zeigeFehler('zahlungsart', '');
@@ -306,6 +307,21 @@
     }
     if (t.type === 'checkbox' && REGELN[t.name]) pruefe(t.name);
   });
+
+  // Nach der Kistenwahl direkt zum Formular springen und das erste leere Feld aktivieren.
+  // Kurze Pause, damit man den Haken an der Karte noch sieht.
+  function zumFormular() {
+    var ziel = document.getElementById('formular');
+    if (!ziel) return;
+    var weich = !(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+    setTimeout(function () {
+      ziel.scrollIntoView({ behavior: weich ? 'smooth' : 'auto', block: 'start' });
+      var leer = ['vorname', 'nachname', 'email', 'telefon', 'strasse', 'plz', 'ort']
+        .map(function (n) { return form.elements[n]; })
+        .filter(function (el) { return el && !el.value; })[0];
+      if (leer) setTimeout(function () { try { leer.focus({ preventScroll: true }); } catch (e) { /* egal */ } }, weich ? 600 : 0);
+    }, 250);
+  }
 
   function zeigePanel(art) {
     form.querySelectorAll('[data-payment-panel]').forEach(function (p) {
